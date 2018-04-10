@@ -2,25 +2,28 @@
 * by Andrew Delpha <delpha@computer.org>
 *
 * Network UPS Tools maintained by Arnaud Quette, of MGE UPS SYSTEMS.
-* Many thanks to Russell Kroll, the original author and maintainer, for 
-*   his excellent work and years of dedication to the project
-* Windows WinNutUPSMon monitor ported and maintained by 
-*   Andrew Delpha <delpha@computer.org>
-*    see CREDITS file in the nut package for more details
-*
+* Many thanks to Russell Kroll, the original author and maintainer, for his excellent work and years of dedication to the project Windows WinNutUPSMon monitor ported and maintained by Andrew Delpha <delpha@computer.org> see CREDITS file in the nut package for more detail.
+
+
+License
+=======
+
 * Released under the GNU GPL - see COPYING for details.
 *
-* Program support page: http://random.networkupstools.org/
-*            WinNUT at: http://csociety.ecn.purdue.edu/~delpha/winnut/
 
-DESCRIPTION
+Links:
+
+- Program support page: http://random.networkupstools.org/
+- WinNUT at: http://csociety.ecn.purdue.edu/~delpha/winnut/ (dead)
+
+Description
 ===========
 This is a windows port of the upsmon client provided with the 
 Network UPS Tools package.  It provides a background 
 application/service to monitor a ups, display the desired
 notifications, and shutdown the windows computer if necessary.
 
-FILES INCLUDED IN BINARY PACKAGE (after installation)
+Files included in binary package (after installation)
 ================================
 > alertPopup.exe - This takes a message provided on the command 
 	line and displays it in a modal popup window.
@@ -36,7 +39,7 @@ FILES INCLUDED IN BINARY PACKAGE (after installation)
 > ChangeLog.txt - List of changes between versions
 > COPYING - copy GNU General Public License
 
-INSTALLATION:
+Installation:
 =============
 1) You must have a nut ups daemon (v1.4.x and greater supported) running 
 on a another system (windows version is currently the monitor client only) 
@@ -75,6 +78,7 @@ that's monitoring the desired ups.
          If this time expires, WinNUT gives up and shuts down anyway.  This helps 
          alieviate race conditions where the slave systems shutdown as power is 
          restored and the master doesn't shutdown.
+	 
    H) Shutdown Method - This is a very important setting.  I would recommend
       Forced unless you have problems.
 	* Normal - This is a normal shutdown, where applications get a chance
@@ -160,55 +164,48 @@ that's monitoring the desired ups.
         Type (without quotes) "net stop WinNutUpsMon" and press enter
       or use the GUI services manager from the control panel.
 
-OTHER NOTES:
+Other notes:
 ============
--> Under Windows 9x, the WinNUTUpsMon will not show up as a running process when you press 
-   <CTRL><ALT><DEL> as it is registered as a background process so it doesn't get killed
-   when a user logs out.  Under NT/2000, if WinNUT is run in application mode, it will get
-   killed when the user who started it logs out (I don't think there's any way around this
-   under NT).  Use the service version if you want it to run all the time.
+Under Windows 9x, the WinNUTUpsMon will not show up as a running process when you press <CTRL><ALT><DEL> as it is registered as a background process so it doesn't get killed when a user logs out.  Under NT/2000, if WinNUT is run in application mode, it will get killed when the user who started it logs out (I don't think there's any way around this under NT).  Use the service version if you want it to run all the time.
 
-There are several configuration variables that WinNUT ignores.  
-The following are ignored
-SHUTDOWNCMD
-POWERDOWNFLAG
+There are several configuration variables that WinNUT ignores. The following are ignored
+
+- SHUTDOWNCMD
+- POWERDOWNFLAG
+
 
 Using net send
+
   If you would like to use net send to send messages under NT/2000:
-  I would suggest using a batch file as the command and placing the
-  net send command in it, as I don't think the current launch command
-  can deal with passing the parameters.  Note: the net command is a 
-  console command, so for every message it sends, it will briefly 
-  popup a command window on the screen that may take focus away from 
-  the current app - I haven't found any way around this (if you know,
-  please tell me).
+  I would suggest using a batch file as the command and placing the net send command in it, as I don't think the current launch command can deal with passing the parameters.
+  
+Note: the net command is a  console command, so for every message it sends, it will briefly  popup a command window on the screen that may take focus away from  the current app - I haven't found any way around this (if you know,  please tell me).
 
-UNINSTALLING:
+Uninstalling:
 =============
-Use the uninstaller in the Start->Programs->WinNUT menu
-OR
-Use the Add/Remove programs tool under the control panel
 
-The upsmon.conf will be left in the program folder in case you are 
-uninstalling for an upgrade
+- Use the uninstaller in the Start->Programs->WinNUT menu
+- Use the Add/Remove programs tool under the control panel
 
-If for any reason this should fail, here's the old info on manual removal
+The `upsmon.conf` will be left in the program folder in case you are uninstalling for an upgrade
+
+If for any reason this should fail, here's the old info on manual removal:
 
 Launch the configuration tool
-  ->Stop WinNut
+ - Stop WinNut
   - Under Windows 9x/ME
-    -> uncheck the automatic startup box
+    - uncheck the automatic startup box
   - Under Windows NT/2000/XP(whistler)
-    -> uncheck the run as service
+    - uncheck the run as service
+
 Note the path to the log file, config file, and the executables
 Close the configuration tool
 
-Using regedit remove \HKEY_LOCAL_MACHINE\Software\WinNUT and all it's subkeys
+Using regedit remove `\HKEY_LOCAL_MACHINE\Software\WinNUT` and all it's subkeys.
 
 If you are under windows NT/2000 Use regedit to remove the following key
   \\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application\WinNutUPSMon
-  NOTE: Removing this key will cause the application event logger to not recognize WinNUT 
-  events in the application log.  I've not seen this cause any real problems thus far though.
+  NOTE: Removing this key will cause the application event logger to not recognize WinNUT events in the application log.  I've not seen this cause any real problems thus far though.
 
 Delete the WinNUT program directory (if you unzipped the WinNUT stuff in a directory by itself)
 Delete the logfile and config file (if they were not in the WinNUT directory)
